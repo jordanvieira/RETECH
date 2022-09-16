@@ -87,3 +87,6 @@ or
   <li>python manage.py makemigrations -> comando prepara as migrações para o banco de dados</li>
   <li>python manage.py migrate -> comando realiza as migrações para o banco de dados</li>
 </ul>
+
+## Status
+![Status Build](https://github.com/jordanvieira/RETECH/actions/workflows/main.yml/badge.svg?event=push)
