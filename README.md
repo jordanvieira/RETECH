@@ -88,5 +88,5 @@ or
   <li>python manage.py migrate -> comando realiza as migrações para o banco de dados</li>
 </ul>
 
-## Status
-![Status Build](https://github.com/jordanvieira/RETECH/actions/workflows/main.yml/badge.svg?event=push)
+## Build Status
+![Build Status](https://github.com/jordanvieira/RETECH/actions/workflows/build.yml/badge.svg?event=push)
