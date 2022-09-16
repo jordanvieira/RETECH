@@ -31,4 +31,5 @@ jobs:
                 ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:${{ github.run_number }}
 
             run: |
-                echo "${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:${{ github.run_number }}"
+                echo "Repositorio da imagem:"
+                echo "jordanvieira/${{ github.event.repository.name }}:${{ github.run_number }}"
