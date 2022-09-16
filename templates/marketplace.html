@@ -1,0 +1,83 @@
+{% extends 'model/base.html' %}
+
+{% block title %} {% endblock %}
+
+{% block extracss %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="botao-flutuante">
+    <a href="{% url 'service' %}">
+        <button type="button" class="information-btn shadow btn-hover">
+            Onde descartar?
+            <img src="{% static 'image/lupa.png' %}" alt="lupa" class="lupa" style="width: 45px;">
+        </button>
+    </a>
+</div>
+<div class="container mb-4">
+    <div class="row">
+        <div class="col m-4 ms-5">
+            <h1 class="" style="font-weight: bold;">Marketplace</h1>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'anunciar' %}">
+                        <button class="btn-login m-2" style="width: 160px; height: 34px; margin: 0 !important">Anunciar</button>
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}">
+                        <button class="btn-login m-2" style="width: 160px; height: 34px; margin: 0 !important">Anunciar</button>
+                    </a>
+                {% endif %}
+        </div>
+        <div class="col m-3">
+            <div class="col-8 col-xxl-5 col-sm-7 m-auto pt-2 pb-2 mt-4" style="text-align: right;">
+                <form method="get">
+                    <input type="text" id="search" name="search" class="form-control input-style marketplace-search"
+                           placeholder="Pesquisar"
+                           value="{{ request.GET.search }}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="margin-bottom: 95px;">
+    <div class="row row ms-2 me-2" style="display: flex; justify-content: center; gap: 3rem;">
+        {% for produto in produtos %}
+            <div class="card card-marketplace mt-4" style="width: 20rem;">
+                {% if produto.preco_prod %}
+                <a href="{% url 'descricao_produto' tipo='venda' name=produto.nome_prod cod=produto.id %}">
+                {% else %}
+                <a href="{% url 'descricao_produto' tipo='doacao' name=produto.nome_prod cod=produto.id %}">
+                {% endif %}
+                    <img src="{{produto.img_prod.url}}" class="card-img-top p-4" alt="Produto">
+                    <div class="card-body">
+                        <h5 class="card-title">{{produto.nome_prod}}</h5>
+                        <div class="value-product">
+                            {% if produto.preco_prod %}
+                            <p class="card-text float-end">
+                                R$ {{produto.preco_prod}}
+                            </p>
+                            {% else %}
+                            <p class="card-text ms-4 float-end">
+                                Doação
+                            </p>
+                            {% endif %}
+                        </div>
+                        <div class="description-product">
+                            <p>
+                                {{produto.descricao_prod}}
+                            </p>
+                            <p>{{produto.cidade}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+    {% endblock %}
