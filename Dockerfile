@@ -1,26 +1,22 @@
-# imagem base que será utilizada
-FROM python:3.8.0
+# Use uma imagem oficial do Python como imagem pai
+FROM python:3.8.0-slim
 
-# criando um diretório
-RUN mkdir /Retech
-# definindo váriaveis de ambiente
-# python não gera arquivos .pyc
+# Defina variáveis de ambiente
 ENV PYTHONDONTWRITEBYTECODE 1
-# as mensagens de log não ficaram armazenadas em buffers
 ENV PYTHONUNBUFFERED 1
+ENV DEBUG 1
 
-# definindo o diretório
+# Crie e defina o diretório de trabalho
 WORKDIR /Retech
 
-# copia o requirements para o diretório /Retech
+# Instale as dependências
 COPY requirements.txt .
-# intalar as dependencias do projeto
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# copia tudo que está na pasta local e envia para o diretório /Retech
+# Copie os arquivos do projeto para o diretório de trabalho
 COPY . .
 
-# Expondo porta do django
+# Exponha a porta para o servidor Django
 EXPOSE 8000
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
